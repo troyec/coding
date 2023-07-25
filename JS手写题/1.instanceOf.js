@@ -4,11 +4,12 @@
  * @param {*} func 构造函数
  * @returns true false
  */
+// 函数的prototype属性指向了一个对象，这个对象正是调用该构造函数而创建的实例的原型，也就是这个例子中的p1.__proto__。
 const instanceOf1 = (obj, func) => {
   if (!(obj && ['object', 'function'].includes(typeof obj))) {
     return false
   }
-  
+  // Returns the prototype of an object.
   let proto = Object.getPrototypeOf(obj)
 
   if (proto === func.prototype) {
@@ -17,6 +18,20 @@ const instanceOf1 = (obj, func) => {
     return false
   } else {
     return instanceOf1(proto, func)
+  }
+}
+
+const instanceOf3 = (obj,func) => {
+  if(!(obj && ['object','function'].includes(typeof obj))){
+    return false
+  }
+  let proto = Object.getPrototypeOf(obj)
+  if(proto === func.prototype){
+    return true
+  }else if(proto === null){
+    return false
+  }else{
+    return instanceOf3(proto,func)
   }
 }
 /**
@@ -57,7 +72,7 @@ const instanceOf2 = (obj, func) => {
 let Fn = function () { }
 let p1 = new Fn()
 
-console.log(instanceOf1({}, Object))
+console.log(instanceOf3({}, Object))
 console.log(instanceOf1(p1, Fn))
 console.log(instanceOf1({}, Fn))
 console.log(instanceOf1(null, Fn))

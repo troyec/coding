@@ -1,5 +1,6 @@
 /**
  * 与call方法类似，只是参数的传递方式不同
+ * 实现apply只要把...args换成args即可
  * @param {*} context 函数执行上下文this
  * @param  {...any} args 参数列表
  * @returns 函数执行的结果

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="el1">hello</div>
+  <div id="el2">world
+    <div id="el3">!</div>
+  </div>
+  <script>
+    // 熟悉节点和contains方法
+    function commonParentNode(oNode1, oNode2) {
+        if (oNode1.contains(oNode2)) {
+          return oNode1
+        } else if (oNode2.contains(oNode1)) {
+          return oNode2
+        } else {
+          return findCommonParent(oNode1.parentNode, oNode2)
+        }
+      }
+
+      function findCommonParent (oNode1, oNode2) {
+        while (!oNode1.contains(oNode2)) {
+          oNode1 = oNode1.parentNode 
+        }
+
+        return oNode1
+      }
+    console.log(commonParentNode(document.documentElement, document.getElementById('el2')));
+    console.log(commonParentNode(document.getElementById('el1'), document.documentElement));
+    console.log(commonParentNode(document.getElementById('el2'), document.getElementById('el3')));
+    console.log(commonParentNode(document.getElementById('el3'), document.getElementById('el2')));
+  </script>
+</body>
+</html>

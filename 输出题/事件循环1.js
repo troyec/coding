@@ -20,6 +20,12 @@ new Promise((resolve) => {
 process.nextTick(() => {
   console.log(6);
 });
+new Promise((resolve) => {
+  console.log('s');
+  resolve();
+}).then(() => {
+  console.log('e');
+});
 setTimeout(() => {
   console.log(9);
   process.nextTick(() => {
